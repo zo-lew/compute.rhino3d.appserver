@@ -1,34 +1,18 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/mcneel/compute.rhino3d.appserver/main?label=version&style=flat-square)
 ![node-current (scoped)](https://img.shields.io/badge/dynamic/json?label=node&query=engines.node&url=https%3A%2F%2Fraw.githubusercontent.com%2Fmcneel%2Fcompute.rhino3d.appserver%2Fmain%2Fpackage.json&style=flat-square&color=dark-green)
 
-# Rhino Compute AppServer
-A node.js server acting as a bridge between client apps and private compute.rhino3d servers.
+# Deiliskipulag App
+This app has been created for the purposes of neighbourhood planning per guidelines and directives given by municipalities within Iceland's capitol region. It allows users to quickly rough out how many plots, at what size, and what buildable area can be placed on a site. 
 
-This app is intended to host one or more custom grasshopper definitions and serve as the API that client applications can call to have definitions solved with modified input parameters.
+This is designed for the initial schematic stages. 
 
-## Features
-- **Easy to get started**: fork/clone this repo and run it locally for testing or push to a service like Heroku for a production web server
-- **Easy to customize**: fork this repo, place your custom grasshopper definitions in the files directory and you now have a custom AppServer for your definitions.
-- **Caching**: Assuming definitions produce the same results when the same set of inputs are provided, the appserver caches all results in memory for faster response times.
-- **Timings**: Server-timing headers are returned to the client to help diagnose bottlenecks in the definition solving process.
 
-## Getting Started
-1. Fork this repo
-2. Follow the [installation guide](docs/installation.md) to test and debug on your computer
-3. Follow the [Heroku hosting guide](docs/heroku.md) to push your customized AppServer to Heroku for a production web server
+## Parameters
+- **1-Grid Size**: Slider - Establish is the required number of plots can be achieved on site 
+- **2-Plot Size**: Slider - Using a the slider establish typical plot size (in m)
+- **3-Building Size**: Slider - Play around with sizes and establish typical buildable area/size (in m)
+- **4-Building Height**: Choose 1 level 3.5m or 2 level 7m height
+- **5-Streets**: Using gumball moves the cuves around to configure streets (this part needs further development, currently not working) 
 
-## How and What Video
-- A workshop on using the appserver can be found at https://vimeo.com/442079095 - also [slides](https://docs.google.com/presentation/d/1nCbd87iA_D2ZCwoSirOYK3har6XUJHDUEIkt635btUU)
-- AECTECH 2020 workshop: https://youtu.be/At4BaIuEE3c - [slides](https://docs.google.com/presentation/d/1uY6DcYpBNrgxk8sbHHv1gy3IZWRmO7QF1rUT1XOl3s0/edit?usp=drivesdk)
-
-## Example
-When we have our testing server up and running, you can visit
-
-https://compute-rhino3d-appserver.herokuapp.com/examples/
-
-To see a sample web application that passes three numbers based on slider positions to the AppServer for solving a grasshopper definition. Results are returned to the web page and new mesh visualizations are created.
-
-----
-## Other Information
-- [API Endpoints](docs/endpoints.md) the server supports
-- [Client Code](docs/clientcode.md) example for calling the AppServer
+## Pluggins
+n/a - only native GH components used
