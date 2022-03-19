@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="data:,">
+        <title>Lewis_Final_Iteration 3.gh</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            canvas { width: 100%; height: 100%; }
+            input[type=range] { width: 100%; }
+            #container { position: relative; }
+            #container canvas, #overlay { position: absolute; }
+            #overlay { z-index: 1; width: 100%; }
+            #overlay div { padding: 5px; }
+            #loader {
+                border: 5px solid #f3f3f3; /* Light grey */
+                border-top: 5px solid #3d3d3d; /* Grey */
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loader"></div> 
+        <div id="container">
+            <div id="overlay">
+                <div>
+                  <label for="u1">u1</label>
+                  <input type="number" id="u1" value="26">
+                </div>
+                <div>
+                  <label for="v1">v1</label>
+                  <input type="number" id="v1" value="23">
+                </div>
+                <div>
+                  <label for="x2">x2</label>
+                  <input type="number" id="x2" value="29">
+                </div>
+                <div>
+                  <label for="y2">y2</label>
+                  <input type="number" id="y2" value="30">
+                </div>
+                <div>
+                  <label for="x3">x3</label>
+                  <input type="number" id="x3" value="17">
+                </div>
+                <div>
+                  <label for="y3">y3</label>
+                  <input type="number" id="y3" value="16">
+                </div>
+                <div>
+                  <label for="z4">z4</label>
+                  <input type="number" id="z4" value="0">
+                </div>
+                <div><button id="downloadButton" disabled>Download</button></div>
+                <div><a href="Lewis_Final_Iteration 3.gh" download="Lewis_Final_Iteration 3.gh.html">Save source code</a></div>
+            </div>
+        </div>
+
+        <script type="module">
+        </script>
+    </body>
+</html>
