@@ -35,6 +35,8 @@ const z4_slider = document.getElementById( 'z4' )
 z4_slider.addEventListener( 'mouseup', onSliderChange, false )
 z4_slider.addEventListener( 'touchend', onSliderChange, false )
 
+let points = [];
+
 // globals
 let rhino, doc
 
@@ -42,12 +44,72 @@ rhino3dm().then(async m => {
     rhino = m
 
     init()
+    rndPts()
     compute()
 })
 
 const downloadButton = document.getElementById("downloadButton")
 downloadButton.onclick = download
 
+////////POINTS!!!/////////////
+
+function rndPts() {
+  // generate random points
+
+  const cntPts = 6
+  const bndX = dimension_slider.valueAsNumber / 2
+  const bndY = dimension_slider.valueAsNumber / 2
+
+  for (let i = 0; i < cntPts; i++) {
+    const x = Math.random() * (bndX - -bndX) + -bndX
+    const y = Math.random() * (bndY - -bndY) + -bndY
+    const z = 0
+
+    const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+
+    console.log( `x ${x} y ${y}` )
+
+    points.push(pt)
+
+      //viz in three
+      const icoGeo = new THREE.IcosahedronGeometry(0.1);
+      const icoMat = new THREE.MeshNormalMaterial();
+      const ico = new THREE.Mesh(icoGeo, icoMat);
+      ico.name = "ico";
+      ico.position.set(x, y, z);
+      scene.add(ico);
+  
+      let tcontrols = new TransformControls(camera, renderer.domElement);
+      tcontrols.enabled = true;
+      tcontrols.attach(ico);
+      //tcontrols.showZ = false;
+      tcontrols.addEventListener("dragging-changed", onChange);
+      scene.add(tcontrols);
+    }
+  }
+  
+  let dragging = false
+  function onChange() {
+    dragging = ! dragging
+    if ( !dragging ) {
+      // update points position
+      points = []
+      scene.traverse(child => {
+        if ( child.name === 'ico' ) {
+          const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+          points.push( pt )
+          console.log(pt)
+        }
+      }, false)
+  
+      compute();
+  
+      controls.enabled = true;
+      return;
+    }
+  
+    controls.enabled = false;
+  }
   /////////////////////////////////////////////////////////////////////////////
  //                            HELPER  FUNCTIONS                            //
 /////////////////////////////////////////////////////////////////////////////
@@ -132,6 +194,20 @@ async function compute() {
   Object.keys(data.inputs).forEach(key => url.searchParams.append(key, data.inputs[key]))
   console.log(url.toString())
   
+  const data = {
+    definition: definition,
+    inputs: {
+      'u1': u1_slider.valueAsNumber,
+      'v1': v1_slider.valueAsNumber,
+      'x2': x2_slider.valueAsNumber,
+      'y2': y2_slider.valueAsNumber,
+      'x3': x3_slider.valueAsNumber,
+      'y3': y3_slider.valueAsNumber,
+      'z4': z4_slider.valueAsNumber,
+      'points': points
+    },
+  };
+
   try {
     const response = await fetch(url)
   
