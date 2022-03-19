@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.module.js'
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/OrbitControls.js'
+import { TransformControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/TransformControls.js";
 import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js'
 import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js'
 
@@ -8,10 +9,8 @@ const loader = new Rhino3dmLoader()
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
 // initialise 'data' object that will be used by compute()
-const data = {
-  definition: 'Lewis_Final_Iteration 3.gh',
-  inputs: getInputs()
-}
+const data = { definition: 'Lewis_Final_Iteration 3.gh', inputs: getInputs()}
+
 // setup input change events
 const u1_slider = document.getElementById( 'u1' )
 u1_slider.addEventListener( 'mouseup', onSliderChange, false )
@@ -54,24 +53,32 @@ downloadButton.onclick = download
 ////////POINTS!!!/////////////
 
 function rndPts() {
-  // generate random points
+  // generate initial points
 
-  const cntPts = 6
-  const bndX = dimension_slider.valueAsNumber / 2
-  const bndY = dimension_slider.valueAsNumber / 2
+  const startPts = [
+    {x: -530.39, y: 402.95, z: 48.44},
+    {x: -413.10, y: 403.32, z: 59.47},
+    {x: -337.51, y: 386.02, z: 70.03}, 
+    {x: -262.22, y: 389.58, z: 78.42}, 
+    {x: -181.43, y: 425.82, z: 81.18}, 
+    {x: -88.50, y: 404.49, z: 93.93}, 
+
+  ]
+  
+  const cntPts = startPts.length
 
   for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * (bndX - -bndX) + -bndX
-    const y = Math.random() * (bndY - -bndY) + -bndY
-    const z = 0
+    const x = startPts[i].x
+    const y = startPts[i].y
+    const z = startPts[i].z
 
     const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
 
-    console.log( `x ${x} y ${y}` )
+    console.log( `x ${x} y ${y} z ${z}`)
 
     points.push(pt)
-
-      //viz in three
+  
+    //viz in three
       const icoGeo = new THREE.IcosahedronGeometry(0.1);
       const icoMat = new THREE.MeshNormalMaterial();
       const ico = new THREE.Mesh(icoGeo, icoMat);
@@ -85,9 +92,9 @@ function rndPts() {
       //tcontrols.showZ = false;
       tcontrols.addEventListener("dragging-changed", onChange);
       scene.add(tcontrols);
-    }
+
   }
-  
+}  
   let dragging = false
   function onChange() {
     dragging = ! dragging
