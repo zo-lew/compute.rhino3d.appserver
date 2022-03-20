@@ -12,84 +12,54 @@
             body {
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
+                text-align: left;
                 background-color: rgb(255, 255, 255);
             }
 
             header{
-                font-size: 25px;
-                text-align: center;
-                padding: 10px;
+                font-size: 40px;
+                text-align: left;
+                padding: 5px;
                 padding-right: 0;
+                padding-left: 20px;
                 width: 100%;
                 display: inline-block;
                 font-weight: bold;
                 color: white;
                 text-decoration: none;
-                font-style: normal;
+                font-style: helvetica;
                 margin-top: 5px;
                 margin-bottom: 5px;
-                background-color: #00F08C;
-                letter-spacing: 0.2px;
+                background-color: rgb(0, 240, 140);
+                letter-spacing: 2px;
                 border-radius: 0px;
             }
 
-            #instructions{
-              font-size: 12px;
-              text-align: center;
-              padding: 10px;
-              width: 50%;
-              color: white;
-              text-decoration: none;
-              font-style: normal;
-              margin-top: 5px;
-              margin-bottom: 5px;
-              background-color: rgba(236, 129, 255, 0.4);
-              letter-spacing: 0.2px;
-              border-radius: 0px;
-              position: absolute;
-              margin-left: auto;
-              margin-right: auto;
-              left: 0;
-              right: 0;
-              top: 30%;
-            }
-
-            results{
+            h3{
                 font-size: 12px;
                 text-align: left;
-                padding: 4px;
+                padding: 10px;
                 padding-right: 0;
                 width: 100%;
                 display: inline-block;
-                color: rgb(40, 176, 255);
+                font-weight: bold;
+                color: rgb(255, 99, 206);
                 text-decoration: none;
-                font-style: normal;
+                font-style: italic;
                 margin-top: 5px;
                 margin-bottom: 5px;
-                background-color: rgba(255, 255, 255, 0.4);
+                background-color: rgba(255, 255, 255, 0.048);
                 letter-spacing: 0.2px;
                 border-radius: 0px;
             }
 
-            canvas { width: 100%; height: 100%; }
+                      canvas { width: 100%; height: 100%; }
             input[type=range] { width: 100%; }
             #container { position: relative; }
             #container canvas, #overlay { position: absolute; }
             #overlay { z-index: 1; width: 20%; }
             #overlay div { padding: 5px; }
-            #loader {
-                border: 5px solid #a0a0a0; /* Light grey */
-                border-top: 5px solid #3d3d3d; /* Grey */
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                animation: spin 1s linear infinite;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                z-index: 2;
-                display: none; /* start hidden */
-            }
+           
 
             #sidebar {  
                 z-index: 1; 
@@ -110,11 +80,11 @@
 
             .slider{
                 -webkit-appearance: none;
-                width: 10px;
+                width: 12px;
                 height: 8px;
                 border-radius: 5px;
-                border-color: rgb(204, 204, 204);
-                background-color: rgb(212, 212, 212);
+                border-color: rgb(255, 255, 255);
+                background-color: rgb(241, 187, 7);
             }
 
             .slider::-webkit-slider-thumb{
@@ -122,31 +92,31 @@
                 width: 16px;
                 height: 16px;
                 border-radius: 12px;
-                background-color: rgba(205, 249, 255);
+                background-color: #FF63CE;
                 cursor: pointer;
             }
 
             .sliderLabel{
-                font-size: 10px;
+                font-size: 12px;
                 text-align: left;
-                padding: 5px;
+                padding: 10px;
                 padding-right: 0;
                 width: 100%;
                 display: inline-block;
                 font-weight: bold;
-                color: rgb(236, 129, 255);
+                color: #FF63CE;
                 text-decoration: none;
                 font-style: normal;
                 margin-top: 5px;
                 margin-bottom: 5px;
-                background-color: rgba(255, 255, 255, 0.4);
+                background-color: rgba(255, 255, 255, 0.048);
                 letter-spacing: 0.2px;
                 border-radius: 0px;
             }
 
             #loader {
                 border: 5px solid #00F08C; /* Light grey */
-                border-top: 5px solid #FF63CE; /* Grey */
+                border-top: 5px solid rgb(241, 187, 7); /* Grey */
                 border-radius: 50%;
                 width: 20px;
                 height: 20px;
@@ -161,15 +131,22 @@
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
+        
+            
 
         </style>
     </head>
     <body>
-      <header>deiliskipulag</header>
-
+    </div>
+    <header>deiliskipulag</header>
+    </div>
         <div id="loader"></div> 
         <div id="container">
             <div id="overlay">
+                <div>
+                  <h3>This app has been created for the purposes of neighbourhood planning per guidelines and directives given by municipalities within Iceland's capitol region. It allows users to quickly rough out how many plots, at what size, and what buildable area can be placed on a site.
+
+                    This is designed for the initial schematic stages.</h3></div>
               <div id="info">
 
                 <div>
@@ -205,9 +182,9 @@
                   <input class = "slider" type="range" id="z4" name="z4" min="1" max="50" value="2" step="1">
                 </div>
                 <div>
-                  <div><button id="downloadButton" disabled>Download</button></div>
+                  <div><button class="downloadButton" disabled>Download Model</button></div>
                   <div><a href="Lewis_Final_Iteration 3.gh" download="Lewis_Final_Iteration 3.gh.html">Save source code</a></div>
-              </div>
+                </div>
           </div>
           <script type="module" src="./script.js"></script>
 
