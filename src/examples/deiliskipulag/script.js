@@ -51,6 +51,9 @@ let points = [];
 // globals
 let rhino, doc
 
+const downloadButton = document.getElementById("downloadButton")
+downloadButton.onclick = download 
+
 rhino3dm().then(async m => {
     rhino = m
 
@@ -357,6 +360,15 @@ function onWindowResize() {
   animate();
 }
 
+//Download button
+function download (){
+  let buffer = doc.toByteArray()
+  let blob = new Blob([ buffer ], { type: "application/octect-stream" })
+  let link = document.createElement('a')
+  link.href = window.URL.createObjectURL(blob)
+  link.download = 'Lewis_Final_Iteration 4.3dm'
+  link.click()
+  }
 
 /**
  * Helper function that behaves like rhino's "zoom to selection", but for three.js!
@@ -394,22 +406,3 @@ function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 ) {
   
 }
 
-/**
- * This function is called when the download button is clicked
- */
-function download () {
-    // write rhino doc to "blob"
-    const bytes = doc.toByteArray()
-    const blob = new Blob([bytes], {type: "application/octect-stream"})
-
-    // use "hidden link" trick to get the browser to download the blob
-    const filename = data.definition.replace(/\.gh$/, '') + '.3dm'
-    const link = document.createElement('a')
-    link.href = window.URL.createObjectURL(blob)
-    link.download = filename
-    link.click()
-}
-
-/**
- * Shows or hides the loading spinner
- */
