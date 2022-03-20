@@ -9,7 +9,10 @@ const loader = new Rhino3dmLoader()
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
 // initialise 'data' object that will be used by compute()
-const data = { definition: 'Lewis_Final_Iteration 3.gh', inputs: getInputs()}
+const data = {
+  definition: 'Lewis_Final_Iteration 3.gh',
+  inputs: getInputs()
+}
 
 // setup input change events
 const u1_slider = document.getElementById( 'u1' )
