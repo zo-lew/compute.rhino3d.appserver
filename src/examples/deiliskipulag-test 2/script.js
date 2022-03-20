@@ -7,6 +7,8 @@ import { TransformControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/ex
 
 // set up loader for converting the results to threejs
 const loader = new Rhino3dmLoader()
+const curveDataToCompute = JSON.stringify( nurbsCurve.encode() )
+console.log( curveDataToCompute )
 loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
 
@@ -65,17 +67,16 @@ rhino3dm().then(async m => {
 function rndPts() {
   // generate initial points
 
-  const startPts = [
-    {x: -530.39, y: 402.95, z: 48.44},
-    {x: -413.10, y: 403.32, z: 59.47},
-    {x: -337.51, y: 386.02, z: 70.03}, 
-    {x: -262.22, y: 389.58, z: 78.42}, 
-    {x: -181.43, y: 425.82, z: 81.18}, 
-    {x: -88.50, y: 404.49, z: 93.93}, 
+  const curvePoints = new rhino.Point3dList()
+  curvePoints.add (-530.39, 402.95, 48.44),
+  curvePoints.add  (-413.10, 403.32, 59.47),
+  curvePoints.add  (-337.51, 386.02, 70.03), 
+  curvePoints.add  (-262.22, 389.58, 78.42), 
+  curvePoints.add  (-181.43, 425.82, 81.18), 
+  curvePoints.add  (-88.50,  404.49, 93.93), 
 
-  ]
-  
-  const cntPts = startPts.length
+   
+  const nurbsCurve = rhino.NurbsCurve.create( false, 3, curvePoints )
 
   for (let i = 0; i < cntPts; i++) {
     const x = startPts[i].x
